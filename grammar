@@ -1,0 +1,4 @@
+Expression <- Term (('+' as Add | '-' as Sub) Term)* 
+Term <- Factor (('*' as Mul | '/' as Div) Factor)* 
+Factor <- Number case Num | '('- Expression ')'- case Exp 
+Number <- re([0-9]+) with \INT 

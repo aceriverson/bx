@@ -1,0 +1,11 @@
+Grammar <- Definition+ 
+Definition <- Identifier ' <- '- Expression 
+Expression <- Sequence ((' '*)- ' | '- Sequence)* 
+Sequence <- (Prefix (' '*)-)* (' case '- Identifier)? 
+Prefix <- ('&' as And | '!' as Not)? Suffix 
+Suffix <- Primary ' with '- Func case With | Ch ' as '- Identifier case As | Primary ('?' as Q | '*' as Star | '+' as Plus | '-' as Minus)? case Sym | Primary case Prim 
+Primary <- Identifier !' <- ' case Id | '('- Expression ')'- case Exp | Re case Re | Ch case Ch
+Identifier <- re([A-Z][a-z0-9]*) 
+Func <- re([\\][A-Z]+) 
+Re <- re(re\((.*)\)) 
+Ch <- re(\'[^\']*\'|\"[^\"]*\") 
